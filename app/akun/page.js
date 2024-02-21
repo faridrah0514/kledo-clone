@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import DefaultLayout from '../components/default_layout/DefaultLayout'
 import TambahAccountModal from '../components/tambah_account/TambahAccountModal'
-import { Button } from 'antd'
+import { Button, Table } from 'antd'
 
 function page() {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -13,6 +13,10 @@ function page() {
     function onCancelHandle() {
       setIsModalOpen(false);
     }
+
+    // function get(params) {
+      
+    // }
   
   return (
     // <div>page</div>
@@ -25,6 +29,7 @@ function page() {
         />
       )}
       <Button onClick={onClickHandle}>Tambah Akun</Button>
+  
     </DefaultLayout>
   )
 }
