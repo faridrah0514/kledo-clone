@@ -1,4 +1,4 @@
-import { TagsOutlined, PieChartOutlined, ShoppingCartOutlined, CreditCardOutlined } from '@ant-design/icons';
+import { TagsOutlined, PieChartOutlined, ShoppingCartOutlined, CreditCardOutlined, BarsOutlined } from '@ant-design/icons';
 import Link from 'next/link';
 
 const sidebarMenu = [
@@ -10,6 +10,7 @@ const sidebarMenu = [
         getItem('Penawaran', 'penawaran', <TagsOutlined />),
     ]),
     getItem(<Link href='/biaya'>Biaya</Link>, 'biaya', <CreditCardOutlined />),
+    getItem(<Link href='/akun'>Akun</Link>, 'akun', <BarsOutlined />),
 
 ]
 

@@ -7,6 +7,7 @@ import {
   Divider,
   Form,
   Input,
+  Modal,
   Row,
   Select,
   Space,
@@ -14,14 +15,29 @@ import {
   Typography,
 } from "antd";
 const { Title } = Typography;
-import React from "react";
+import React, { useEffect, useState } from "react";
 import dayjs from "dayjs";
+import TambahAccountModal from "@/app/components/tambah_account/TambahAccountModal";
 
 function page() {
   const today = dayjs();
-  // const dayFormat = "YYYY-MM-DD";
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  function onClickHandle() {
+    setIsModalOpen(true);
+  }
+
+  function onCancelHandle() {
+    setIsModalOpen(false);
+  }
+
   return (
     <>
+      {isModalOpen && (
+        <TambahAccountModal
+          isOpen={isModalOpen}
+          onCancelHandle={onCancelHandle}
+        />
+      )}
       <DefaultLayout>
         <div>
           <Title level={1} className="mb-0" style={{ marginBottom: "0" }}>
@@ -29,8 +45,34 @@ function page() {
           </Title>
         </div>
         <div>
-          <Form className="border" layout="vertical">
-            <Form.Item label="Dibayar dari?" required={[{ required: true }]}>
+          <Form
+            className="border"
+            layout="vertical"
+            onFinish={(value) => console.log(value)}
+          >
+            <Form.Item label="Dibayar dari?" name="dibayardari">
+              <Select
+                className="w-[260px]"
+                placeholder="masukkan"
+                dropdownRender={(menu) => (
+                  <>
+                    {menu}
+                    <Divider />
+                    <Button type="link" onClick={onClickHandle}>
+                      Tambahin dong
+                    </Button>
+                  </>
+                )}
+              />
+            </Form.Item>
+            <div className="flex">
+              <Form.Item name="iniSwitch">
+                <Switch />
+              </Form.Item>
+              <h1>Bayar Nanti</h1>
+            </div>
+
+            <Form.Item label="Penerima" name="penerima">
               <Select
                 className="w-[260px]"
                 placeholder="masukkan"
@@ -43,49 +85,29 @@ function page() {
                 )}
               />
             </Form.Item>
-            <Form.Item>
-              <Switch />
-              <Space>Bayar Nanti</Space>
-            </Form.Item>
-            <Form.Item label="Penerima" required={[{ required: true }]}>
-              <Select
-                className="w-[260px]"
-                placeholder="masukkan"
-                dropdownRender={(menu) => (
-                  <>
-                    {menu}
-                    <Divider />
-                    <Button type="link">Tambahin dong</Button>
-                  </>
-                )}
-              />
-            </Form.Item>
-            <Form.Item
-              label="Tanggal Transaksi"
-              required={[{ required: true }]}
-            >
+            <Form.Item label="Tanggal Transaksi" name="tanggal">
               <DatePicker maxDate={today}></DatePicker>
             </Form.Item>
 
             <Row>
               <Col span={8} className="pr-5">
-                <Form.Item label="Satu">
+                <Form.Item label="Satu" name="darisatu">
                   <Input placeholder="Basic usage" />
                 </Form.Item>
               </Col>
-              
+
               <Col span={8} className="pr-5">
-                <Form.Item label="Dua">
+                <Form.Item label="Dua" name="daridua">
                   <Input placeholder="Basic usage" />
                 </Form.Item>
               </Col>
               <Col span={8} className="pr-5">
-                <Form.Item label="Tiga">
+                <Form.Item label="Tiga" name="daritiga">
                   <Input placeholder="Basic usage" />
                 </Form.Item>
               </Col>
             </Row>
-            <Button type="link">Tambahin dong</Button>
+            <Button htmlType="submit">Tambahin dong</Button>
           </Form>
         </div>
       </DefaultLayout>
