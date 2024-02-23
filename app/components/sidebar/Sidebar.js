@@ -10,11 +10,8 @@ const { Sider } = Layout;
 function Sidebar({ path = null }) {
   const [collapsed, setCollapsed] = useState(false);
   const [openKeys, setOpenKeys] = useState([]);
-  // console.log("ini dari sidebar, ini path-nya: ", path);
-  // const handleOpenChange = (keys) => {
-  //   console.log("keys-nya: ", keys);
-  //   setOpenKeys(keys);
-  // };
+
+  
   const keys = path.split("/").filter(Boolean)
   return (
     <Sider
